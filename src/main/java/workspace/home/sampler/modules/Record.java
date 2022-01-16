@@ -7,6 +7,10 @@ public abstract class Record {
     protected HashMap<String, String> columnValues;
     protected ArrayList<String> columns;
 
+    public HashMap<String, String> getColumnValues() {
+        return columnValues;
+    }
+
     public Record()
     {
         this.columnValues = new HashMap<>();
