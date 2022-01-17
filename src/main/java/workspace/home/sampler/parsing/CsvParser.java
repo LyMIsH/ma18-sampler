@@ -16,9 +16,15 @@ public class CsvParser extends Parser{
         ArrayList<Record> recordsList = new ArrayList<>();
         Reader in = new FileReader(file);
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(in);
+        boolean firstLine = true;
+
         for (CSVRecord record: records)
         {
-            recordsList.add(getRecordObject(record, recordType));
+            if (!firstLine)  // The first line of a csv contains column names, not needed.
+            {
+                recordsList.add(getRecordObject(record, recordType));
+            }
+            firstLine = false;
         }
 
         return recordsList.stream();
