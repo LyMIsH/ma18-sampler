@@ -35,7 +35,7 @@ public class Main {
             Stream<Record> recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
             Transformer transformer = new LabTestAdditions();
             recordStream = transformer.transform(recordStream);
-            FileWriter.write("src/main/resources", "test", "json", 50000, recordStream);
+            FileWriter.write("src/main/resources", "test", "xml", 50000, recordStream);
         }
         catch (IOException e)
         {

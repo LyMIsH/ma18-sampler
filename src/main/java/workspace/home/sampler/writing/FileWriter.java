@@ -67,6 +67,7 @@ public class FileWriter {
     private static Writable getWriter(String type) throws InvalidWriterException {
         HashMap<String, Writable> extToWriter = new HashMap<>();
         extToWriter.put("json", new jsonWriter());
+        extToWriter.put("xml", new xmlWriter());
 
         Writable writer = extToWriter.get(type);
         if (writer == null)
