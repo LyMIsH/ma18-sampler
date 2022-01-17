@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class jsonWriter implements Writable{
     @Override
-    public void write(String dest, ArrayList<HashMap<String, String>> records) throws IOException {
+    public void write(String dest, List<HashMap<String, String>> records) throws IOException {
         String ext =".json";
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File(dest + ext), records);

@@ -16,7 +16,7 @@ public class Main {
         Parser csvParser = new CsvParser();
         try {
             Stream<Record> recordStream = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
-            FileWriter.write("src/main/resources", "test", new jsonWriter(), 50000, recordStream);
+            FileWriter.write("src/main/resources", "test", "json", 50000, recordStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

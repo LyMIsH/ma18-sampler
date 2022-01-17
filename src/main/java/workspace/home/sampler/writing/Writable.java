@@ -5,8 +5,9 @@ import workspace.home.sampler.modules.Record;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Stream;
 
 public interface Writable {
-    void write(String destFolder, ArrayList<HashMap<String, String>> recordStream) throws IOException;
+    void write(String destFolder, List<HashMap<String, String>> recordStream) throws IOException;
 }

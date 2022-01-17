@@ -11,7 +11,7 @@ public class MadaRepRecord extends Record {
         super();
         this.columns = new ArrayList<>(Arrays.asList("MDACODE",
                 "IDNum", "IDType", "FirstName", "LastName", "City", "Street", "BuildingNumber",
-                "Barcode", "GetDate", "TakeDate", "ResultDate", "SupplierCode"));
+                "Barcode", "GetDate", "TakeDate", "ResultDate"));
     }
     @Override
     public MadaRepRecord create()
