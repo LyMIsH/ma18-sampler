@@ -23,9 +23,19 @@ public abstract class Record {
         this.columnValues.put(columnName, value);
     }
 
+    public void addColumn(String index, String value)
+    {
+        this.columnValues.put(index, value);
+    }
+
     public void addNewColumn(String name)
     {
         this.columns.add(name);
+    }
+
+    public int recordSize()
+    {
+        return this.columns.size();
     }
 
     public abstract Record create();
