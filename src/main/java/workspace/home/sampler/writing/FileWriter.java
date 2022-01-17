@@ -11,8 +11,7 @@ import java.util.stream.Stream;
 
 public class FileWriter {
 
-    public static void write(String dest, String name, String type, int lineLimit, Stream<Record> recordStream) throws IOException{
-        Writable writer = getWriter(type);
+    public static void write(String dest, String name, Writer writer, int lineLimit, Stream<Record> recordStream) throws IOException{
         ArrayList<Thread> threads = new ArrayList<>();
         ArrayList<HashMap<String, String>> records = new ArrayList<>();
         recordStream.forEach(record -> records.add(record.getColumnValues()));
@@ -52,7 +51,7 @@ public class FileWriter {
         }
     }
 
-    private static void writeThread(Writable writer, String dest, List<HashMap<String, String>> data)
+    private static void writeThread(Writer writer, String dest, List<HashMap<String, String>> data)
     {
         try
         {
@@ -62,19 +61,5 @@ public class FileWriter {
         {
             e.printStackTrace();
         }
-    }
-
-    private static Writable getWriter(String type) throws InvalidWriterException {
-        HashMap<String, Writable> extToWriter = new HashMap<>();
-        extToWriter.put("json", new jsonWriter());
-        extToWriter.put("xml", new xmlWriter());
-
-        Writable writer = extToWriter.get(type);
-        if (writer == null)
-        {
-            throw new InvalidWriterException("Writer '" + type + "' does not exist.");
-        }
-
-        return writer;
     }
 }

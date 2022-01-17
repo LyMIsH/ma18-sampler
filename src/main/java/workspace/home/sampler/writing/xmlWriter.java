@@ -17,9 +17,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-public class xmlWriter implements Writable {
+public class xmlWriter extends Writer {
+    private String recordsElement = "Default";
+    private String recordElement = "Default";
+
+    public xmlWriter(String recordsElement, String recordElement)
+    {
+        this.recordsElement =recordsElement;
+        this.recordElement = recordElement;
+    }
+
     @Override
-    public void write(String destFolder, List<HashMap<String, String>> recordStream) throws IOException {
+    public void write(String destFolder, List<HashMap<String, String>> recordStream) {
         Document dom;
         Element e1;
         Element e2;
@@ -30,11 +39,11 @@ public class xmlWriter implements Writable {
         {
             DocumentBuilder db = dbf.newDocumentBuilder();
             dom = db.newDocument();
-            Element rootEle = dom.createElement("labTests");
+            Element rootEle = dom.createElement(recordsElement);
 
             for (HashMap<String, String> record: recordStream)
             {
-                e1 = dom.createElement("labTest");
+                e1 = dom.createElement(recordElement);
                 for (String key: record.keySet())
                 {
                     e2 = dom.createElement(key);

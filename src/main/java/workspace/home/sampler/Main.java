@@ -9,33 +9,33 @@ import workspace.home.sampler.transforming.DefaultTransformer;
 import workspace.home.sampler.transforming.LabTestAdditions;
 import workspace.home.sampler.transforming.Transformer;
 import workspace.home.sampler.writing.FileWriter;
-import workspace.home.sampler.writing.Writable;
 import workspace.home.sampler.writing.jsonWriter;
+import workspace.home.sampler.writing.xmlWriter;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        /*Parser csvParser = new CsvParser();
+        Parser csvParser = new CsvParser();
         try
         {
             Stream<Record> recordStream = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
             Transformer transformer = new DefaultTransformer();
             transformer.transform(recordStream);
-            FileWriter.write("src/main/resources", "test", "json", 50000, recordStream);
+            FileWriter.write("src/main/resources", "testJson", new jsonWriter(), 50000, recordStream);
         }
         catch (IOException e)
         {
             e.printStackTrace();
-        }*/
-        Parser csvParser = new CsvParser();
+        }
         try
         {
             Stream<Record> recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
             Transformer transformer = new LabTestAdditions();
             recordStream = transformer.transform(recordStream);
-            FileWriter.write("src/main/resources", "test", "xml", 50000, recordStream);
+            FileWriter.write("src/main/resources", "testXml",
+                    new xmlWriter("LabTests", "LabTest"), 50000, recordStream);
         }
         catch (IOException e)
         {
