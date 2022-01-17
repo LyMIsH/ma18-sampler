@@ -12,10 +12,9 @@ import java.util.stream.Stream;
 
 public class jsonWriter implements Writable{
     @Override
-    public void write(String destFolder, Stream<Record> recordStream) throws IOException {
-        List<HashMap<String, String>> records = new ArrayList<>();
-        recordStream.forEach(record -> records.add(record.getColumnValues()));
+    public void write(String dest, ArrayList<HashMap<String, String>> records) throws IOException {
+        String ext =".json";
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File(destFolder + "/test.json"), records);
+        objectMapper.writeValue(new File(dest + ext), records);
     }
 }
