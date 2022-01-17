@@ -1,5 +1,6 @@
 package workspace.home.sampler.writing;
 
+import workspace.home.sampler.exceptions.InvalidWriterException;
 import workspace.home.sampler.modules.Record;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.stream.Stream;
 
 public class FileWriter {
 
-    public static void write(String dest, String name, String type, int lineLimit, Stream<Record> recordStream) throws IOException {
+    public static void write(String dest, String name, String type, int lineLimit, Stream<Record> recordStream) throws IOException{
         Writable writer = getWriter(type);
         ArrayList<Thread> threads = new ArrayList<>();
         ArrayList<HashMap<String, String>> records = new ArrayList<>();
@@ -63,14 +64,14 @@ public class FileWriter {
         }
     }
 
-    private static Writable getWriter(String type) throws IOException {
+    private static Writable getWriter(String type) throws InvalidWriterException {
         HashMap<String, Writable> extToWriter = new HashMap<>();
         extToWriter.put("json", new jsonWriter());
 
         Writable writer = extToWriter.get(type);
         if (writer == null)
         {
-            throw new IOException();
+            throw new InvalidWriterException("Writer '" + type + "' does not exist.");
         }
 
         return writer;
