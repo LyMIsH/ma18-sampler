@@ -21,7 +21,8 @@ public class xmlWriter implements Writable {
     @Override
     public void write(String destFolder, List<HashMap<String, String>> recordStream) throws IOException {
         Document dom;
-        Element e = null;
+        Element e1;
+        Element e2;
         String ext = ".xml";
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -33,12 +34,14 @@ public class xmlWriter implements Writable {
 
             for (HashMap<String, String> record: recordStream)
             {
-                e = dom.createElement("labTest");
+                e1 = dom.createElement("labTest");
                 for (String key: record.keySet())
                 {
-                    e.appendChild(dom.createElement(key).appendChild(dom.createTextNode(record.get(key))));
+                    e2 = dom.createElement(key);
+                    e2.appendChild(dom.createTextNode(record.get(key)));
+                    e1.appendChild(e2);
                 }
-                rootEle.appendChild(e);
+                rootEle.appendChild(e1);
             }
 
             dom.appendChild(rootEle);
@@ -58,7 +61,6 @@ public class xmlWriter implements Writable {
             tr.setOutputProperty(OutputKeys.INDENT, "yes");
             tr.setOutputProperty(OutputKeys.METHOD, "xml");
             tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "roles.dtd");
             tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
             tr.transform(new DOMSource(dom),
