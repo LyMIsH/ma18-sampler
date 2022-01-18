@@ -1,6 +1,5 @@
 package workspace.home.sampler.writing;
 
-import workspace.home.sampler.exceptions.InvalidWriterException;
 import workspace.home.sampler.modules.Record;
 
 import java.io.IOException;
