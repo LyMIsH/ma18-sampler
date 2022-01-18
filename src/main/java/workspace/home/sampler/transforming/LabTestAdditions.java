@@ -18,7 +18,7 @@ public class LabTestAdditions extends Transformer{
         Supplier<Stream<Record>> streamSupplier =
                 recordList::stream;
 
-        streamSupplier.get().forEach(record -> {
+        streamSupplier.get().parallel().forEach(record -> {
             try
             {
                 int idNum = Integer.parseInt(record.getColumnValue("IDNum"));
