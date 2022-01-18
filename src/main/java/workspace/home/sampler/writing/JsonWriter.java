@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class jsonWriter extends Writer {
+public class JsonWriter extends Writer {
     @Override
     public File write(String dest, List<HashMap<String, String>> records) throws IOException {
         String ext = this.getExt();

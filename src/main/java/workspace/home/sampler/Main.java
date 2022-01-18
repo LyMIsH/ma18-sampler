@@ -23,13 +23,13 @@ public class Main {
             Stream<Record> recordStream = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
             Transformer transformer = new DefaultTransformer();
             transformer.transform(recordStream);
-            limiter.write("src/main/resources/mada_reports", "testJson", new jsonWriter(), 50000, recordStream);
+            limiter.write("src/main/resources/mada_reports", "testJson", new JsonWriter(), 50000, recordStream);
 
             recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
             transformer = new LabTestAdditions();
             recordStream = transformer.transform(recordStream);
             limiter.write("src/main/resources/LABTESTS", "testXml",
-                    new xmlWriter("labTests", "labTest"), 50000, recordStream);
+                    new XmlWriter("labTests", "labTest"), 50000, recordStream);
 
             limiter = new SizeLimiter();
             Stream<Record> recordStreamMada = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
@@ -37,7 +37,7 @@ public class Main {
             transformer = new PositivePeopleMerger();
             recordStream = transformer.transform(Stream.concat(recordStreamMada, recordStreamLab));
             limiter.write("src/main/resources/POSITIVE_CORONA_PEOPLE", "test",
-                    new jsonWriter(), 50000, recordStream);
+                    new JsonWriter(), 50000, recordStream);
         }
         catch (IOException e)
         {

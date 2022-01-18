@@ -18,11 +18,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-public class xmlWriter extends Writer {
+public class XmlWriter extends Writer {
     private String recordsElement = "Default";
     private String recordElement = "Default";
 
-    public xmlWriter(String recordsElement, String recordElement)
+    public XmlWriter(String recordsElement, String recordElement)
     {
         this.recordsElement =recordsElement;
         this.recordElement = recordElement;
