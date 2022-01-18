@@ -12,6 +12,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ public class xmlWriter extends Writer {
     }
 
     @Override
-    public void write(String destFolder, List<HashMap<String, String>> recordStream) {
+    public File write(String destFolder, List<HashMap<String, String>> recordStream) {
         Document dom;
         Element e1;
         Element e2;
@@ -60,6 +61,7 @@ public class xmlWriter extends Writer {
         {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
         }
+        return new File(destFolder + ext);
     }
 
     @Override

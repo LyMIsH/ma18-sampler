@@ -20,10 +20,10 @@ public class LineLimiter extends FileLimiter{
         for (int i = 0; i < records.size() / lineLimit; i++)
         {
             fileNum++;
-            int start_index = lines_written;
-            int end_index = lines_written + lineLimit;
+            int startIndex = lines_written;
+            int endIndex = lines_written + lineLimit;
             int finalFileNum = fileNum;
-            Thread thread = new Thread(() -> writeThread(writer, dest + '/' + name + finalFileNum, records.subList(start_index, end_index)));
+            Thread thread = new Thread(() -> writeThread(writer, dest + '/' + name + finalFileNum, records.subList(startIndex, endIndex)));
             threads.add(thread);
             thread.start();
             lines_written += lineLimit;
@@ -31,9 +31,9 @@ public class LineLimiter extends FileLimiter{
         if (lines_written < records.size())
         {
             fileNum++;
-            int start_index = lines_written;
+            int startIndex = lines_written;
             int finalFileNum = fileNum;
-            Thread thread = new Thread(() -> writeThread(writer, dest + '/' + name + finalFileNum, records.subList(start_index, records.size())));
+            Thread thread = new Thread(() -> writeThread(writer, dest + '/' + name + finalFileNum, records.subList(startIndex, records.size())));
             threads.add(thread);
             thread.start();
         }

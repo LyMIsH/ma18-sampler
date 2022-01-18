@@ -10,10 +10,12 @@ import java.util.List;
 
 public class jsonWriter extends Writer {
     @Override
-    public void write(String dest, List<HashMap<String, String>> records) throws IOException {
+    public File write(String dest, List<HashMap<String, String>> records) throws IOException {
         String ext = this.getExt();
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File(dest + ext), records);
+        File file = new File(dest + ext);
+        objectMapper.writeValue(file, records);
+        return file;
     }
 
     @Override
