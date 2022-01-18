@@ -8,10 +8,9 @@ public class PositivePeopleRecord extends Record {
     public PositivePeopleRecord()
     {
         super();
-        this.columns = new ArrayList<>(Arrays.asList("MDACODE",
-                "IDNum", "IDType", "FirstName", "LastName", "City", "Street", "BuildingNumber",
-                "Barcode", "BirthDate", "Labcode", "ResultDate", "TakeDate", "StickerNumber",
-                "ResultTestCorona", "Variant", "TestType"));
+        this.columns = new ArrayList<>(Arrays.asList( "IDNum", "IDType", "FirstName", "LastName", "City",
+                "Street", "BuildingNumber", "Barcode", "BirthDate", "Labcode", "ResultDate", "TakeDate",
+                "StickerNumber", "ResultTestCorona", "Variant", "TestType"));
     }
 
     @Override

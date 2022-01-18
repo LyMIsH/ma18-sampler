@@ -24,8 +24,22 @@ public abstract class Record {
         this.columnValues.put(columnName, value);
     }
 
+    public void addColumn(String index, String value) throws IOException {
+        if (!this.columnValues.containsKey(index))
+        {
+            throw new IOException("Column named '" + index + "' does not exist.");
+        }
+        this.columnValues.put(index, value);
+    }
+
     public String getColumnValue(String columnName)
     {
+        return this.columnValues.get(columnName);
+    }
+
+    public String getColumnValue(int index)
+    {
+        String columnName = this.columns.get(index);
         return this.columnValues.get(columnName);
     }
 
