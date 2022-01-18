@@ -37,7 +37,7 @@ public class Main {
             transformer = new PositivePeopleMerger();
             recordStream = transformer.transform(Stream.concat(recordStreamMada, recordStreamLab));
             limiter.write("src/main/resources/POSITIVE_CORONA_PEOPLE", "test",
-                    new JsonWriter(), 50000, recordStream);
+                    new JsonWriter(), 5000000, recordStream);
         }
         catch (IOException e)
         {

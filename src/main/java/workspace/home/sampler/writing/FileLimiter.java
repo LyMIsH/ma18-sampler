@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public abstract class FileLimiter {
-    public abstract void write(String dest, String name, Writer writer, int lineLimit, Stream<Record> recordStream) throws IOException;
+    public abstract void write(String dest, String name, Writer writer, int limit, Stream<Record> recordStream) throws IOException;
 }
