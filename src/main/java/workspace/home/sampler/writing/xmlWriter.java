@@ -32,7 +32,7 @@ public class xmlWriter extends Writer {
         Document dom;
         Element e1;
         Element e2;
-        String ext = ".xml";
+        String ext = this.getExt();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         try
@@ -60,6 +60,11 @@ public class xmlWriter extends Writer {
         {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
         }
+    }
+
+    @Override
+    protected String getExt() {
+        return ".xml";
     }
 
     private void writeToXml(String dest, Document dom)
