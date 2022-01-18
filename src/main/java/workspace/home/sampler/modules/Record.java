@@ -1,5 +1,7 @@
 package workspace.home.sampler.modules;
 
+import workspace.home.sampler.exceptions.RecordColumnException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +29,7 @@ public abstract class Record {
     public void addColumn(String index, String value) throws IOException {
         if (!this.columns.contains(index))
         {
-            throw new IOException("Column named '" + index + "' does not exist.");
+            throw new RecordColumnException("Column named '" + index + "' does not exist.");
         }
         this.columnValues.put(index, value);
     }
@@ -43,8 +45,11 @@ public abstract class Record {
         return this.columnValues.get(columnName);
     }
 
-    public void addNewColumn(String name, String value)
-    {
+    public void addNewColumn(String name, String value) throws IOException {
+        if (this.columns.contains(name))
+        {
+            throw new RecordColumnException("Column named '" + name + "' already exist.");
+        }
         this.columns.add(name);
         this.columnValues.put(name, value);
     }

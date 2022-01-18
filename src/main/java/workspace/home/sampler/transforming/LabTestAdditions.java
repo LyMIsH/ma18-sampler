@@ -5,6 +5,7 @@ import health_care_provider.errors.InvalidIdException;
 import health_care_provider.models.PersonInsured;
 import workspace.home.sampler.modules.Record;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
@@ -30,7 +31,7 @@ public class LabTestAdditions extends Transformer{
                     record.addNewColumn("HEALTH_CARE_NAME", person.getHealthCareName());
                 }
             }
-            catch (InvalidIdException e)
+            catch (InvalidIdException | IOException e)
             {
                 e.printStackTrace();
             }
