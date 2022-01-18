@@ -25,9 +25,9 @@ public class LabTestAdditions extends Transformer{
                 int idType =  Integer.parseInt(record.getColumnValue("IDType"));
                 if (idType != 0 || idNum > 99999999 && idNum < 1000000000) {
                     PersonInsured person = healthCareInfoProvider.fetchInfo(idNum, idType);
-                    record.addColumn("JOIN_DATE", person.getJoinDate().toString());
-                    record.addColumn("HEALTH_CARE_ID", String.valueOf(person.getHealthCareId()));
-                    record.addColumn("HEALTH_CARE_NAME", person.getHealthCareName());
+                    record.addNewColumn("JOIN_DATE", person.getJoinDate().toString());
+                    record.addNewColumn("HEALTH_CARE_ID", String.valueOf(person.getHealthCareId()));
+                    record.addNewColumn("HEALTH_CARE_NAME", person.getHealthCareName());
                 }
             }
             catch (InvalidIdException e)

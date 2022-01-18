@@ -1,5 +1,6 @@
 package workspace.home.sampler.modules;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,11 +22,6 @@ public abstract class Record {
     {
         String columnName = this.columns.get(index);
         this.columnValues.put(columnName, value);
-    }
-
-    public void addColumn(String index, String value)
-    {
-        this.columnValues.put(index, value);
     }
 
     public String getColumnValue(String columnName)

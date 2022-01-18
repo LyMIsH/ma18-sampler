@@ -35,7 +35,7 @@ public class Main {
             Transformer transformer = new LabTestAdditions();
             recordStream = transformer.transform(recordStream);
             FileWriter.write("src/main/resources", "testXml",
-                    new xmlWriter("LabTests", "LabTest"), 50000, recordStream);
+                    new xmlWriter("labTests", "labTest"), 50000, recordStream);
         }
         catch (IOException e)
         {
