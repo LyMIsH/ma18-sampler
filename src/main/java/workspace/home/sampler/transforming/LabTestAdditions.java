@@ -24,7 +24,7 @@ public class LabTestAdditions extends Transformer{
             {
                 int idNum = Integer.parseInt(record.getColumnValue("IDNum"));
                 int idType =  Integer.parseInt(record.getColumnValue("IDType"));
-                if (idType != 0 || idNum > 99999999 && idNum < 1000000000) {
+                if (idType != 0 || idNum > 99999999 && idNum < 1000000000) { // Taken from healthCare library
                     PersonInsured person = healthCareInfoProvider.fetchInfo(idNum, idType);
                     record.addNewColumn("JOIN_DATE", person.getJoinDate().toString());
                     record.addNewColumn("HEALTH_CARE_ID", String.valueOf(person.getHealthCareId()));

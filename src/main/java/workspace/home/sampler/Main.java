@@ -43,7 +43,7 @@ public class Main {
         Transformer transformer = new PositivePeopleMerger();
         Stream<Record> recordStream = transformer.transform(Stream.concat(recordStreamMada, recordStreamLab));
         limiter.write("src/main/resources/POSITIVE_CORONA_PEOPLE", "test",
-                new JsonWriter(), 50000000, recordStream);
+                new JsonWriter(), 20000000, recordStream);
     }
     public static void main(String[] args) {
         try
