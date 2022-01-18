@@ -7,6 +7,7 @@ import workspace.home.sampler.parsing.CsvParser;
 import workspace.home.sampler.parsing.Parser;
 import workspace.home.sampler.transforming.DefaultTransformer;
 import workspace.home.sampler.transforming.LabTestAdditions;
+import workspace.home.sampler.transforming.PositivePeopleMerger;
 import workspace.home.sampler.transforming.Transformer;
 import workspace.home.sampler.writing.FileWriter;
 import workspace.home.sampler.writing.jsonWriter;
@@ -18,7 +19,7 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) {
         Parser csvParser = new CsvParser();
-        try
+        /*try
         {
             Stream<Record> recordStream = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
             Transformer transformer = new DefaultTransformer();
@@ -28,6 +29,19 @@ public class Main {
             recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
             transformer = new LabTestAdditions();
             recordStream = transformer.transform(recordStream);
+            FileWriter.write("src/main/resources", "testXml",
+                    new xmlWriter("labTests", "labTest"), 50000, recordStream);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }*/
+        try
+        {
+            Stream<Record> recordStreamMada = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
+            Stream<Record> recordStreamLab = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
+            Transformer  transformer = new PositivePeopleMerger();
+            Stream<Record> recordStream = transformer.transform(Stream.concat(recordStreamMada, recordStreamLab));
             FileWriter.write("src/main/resources", "testXml",
                     new xmlWriter("labTests", "labTest"), 50000, recordStream);
         }

@@ -6,36 +6,43 @@ import workspace.home.sampler.modules.PositivePeopleRecord;
 import workspace.home.sampler.modules.Record;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class PositivePeopleMerger extends Transformer {
     @Override
     public Stream<Record> transform(Stream<Record> recordStream) {
-        recordStream.forEach(record -> {
+        List<Record> recordList = recordStream.toList();
+        Supplier<Stream<Record>> streamSupplier = recordList::stream;
+        List<Record> finalRecordList = new ArrayList<>();
+        streamSupplier.get().parallel().forEach(record -> {
             if (record instanceof LabTestRecord)
             {
-                recordStream.forEach(record2 -> {
+                streamSupplier.get().parallel().forEach(record2 -> {
                     if (record2.hashCode() != record.hashCode() && record2 instanceof MadaRepRecord)
                     {
                         if (record.getColumnValue("ResultTestCorona").equals("1") &&
                             record.getColumnValue("IDNum").equals(record2.getColumnValue("IDNum")))
                         {
                             PositivePeopleRecord positivePeopleRecord = createRecord((LabTestRecord) record, (MadaRepRecord) record2);
+                            finalRecordList.add(positivePeopleRecord);
                         }
                     }
                 });
             }
         });
 
-        return null;
+        return finalRecordList.stream();
     }
 
     private PositivePeopleRecord createRecord(LabTestRecord labTest, MadaRepRecord madaRep)
     {
         PositivePeopleRecord positivePeopleRecord = new PositivePeopleRecord();
         try {
-            for (int i = 1; i < 8; i++) {  // Similar columns till 8'th index.
-                positivePeopleRecord.addColumn(i - 1, labTest.getColumnValue(i));
+            for (int i = 1; i <= 8; i++) {  // Similar columns till 8'th index.
+                positivePeopleRecord.addColumn(i - 1, madaRep.getColumnValue(i));
             }
             positivePeopleRecord.addColumn("BirthDate", labTest.getColumnValue("BirthDate"));
             positivePeopleRecord.addColumn("Labcode", labTest.getColumnValue("Labcode"));

@@ -25,7 +25,7 @@ public abstract class Record {
     }
 
     public void addColumn(String index, String value) throws IOException {
-        if (!this.columnValues.containsKey(index))
+        if (!this.columns.contains(index))
         {
             throw new IOException("Column named '" + index + "' does not exist.");
         }
