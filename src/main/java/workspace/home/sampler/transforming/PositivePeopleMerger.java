@@ -24,7 +24,7 @@ public class PositivePeopleMerger extends Transformer {
                     if (record2.hashCode() != record.hashCode() && record2 instanceof MadaRepRecord)
                     {
                         if (record.getColumnValue("ResultTestCorona").equals("1") &&
-                            record.getColumnValue("IDNum").equals(record2.getColumnValue("IDNum")))
+                            record.getColumnValue("StickerNumber").equals(record2.getColumnValue("Barcode")))
                         {
                             PositivePeopleRecord positivePeopleRecord = createRecord((LabTestRecord) record, (MadaRepRecord) record2);
                             finalRecordList.add(positivePeopleRecord);
