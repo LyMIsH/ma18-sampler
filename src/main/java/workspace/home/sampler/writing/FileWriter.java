@@ -20,8 +20,8 @@ public class FileWriter {
         for (int i = 0; i < records.size() / lineLimit; i++)
         {
             fileNum++;
-            int start_index = i;
-            int end_index = i + lineLimit;
+            int start_index = lines_written;
+            int end_index = lines_written + lineLimit;
             int finalFileNum = fileNum;
             Thread thread = new Thread(() -> writeThread(writer, dest + '/' + name + finalFileNum, records.subList(start_index, end_index)));
             threads.add(thread);

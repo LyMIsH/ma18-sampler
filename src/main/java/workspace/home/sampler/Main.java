@@ -24,15 +24,9 @@ public class Main {
             Transformer transformer = new DefaultTransformer();
             transformer.transform(recordStream);
             FileWriter.write("src/main/resources", "testJson", new jsonWriter(), 50000, recordStream);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        try
-        {
-            Stream<Record> recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
-            Transformer transformer = new LabTestAdditions();
+
+            recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
+            transformer = new LabTestAdditions();
             recordStream = transformer.transform(recordStream);
             FileWriter.write("src/main/resources", "testXml",
                     new xmlWriter("labTests", "labTest"), 50000, recordStream);
