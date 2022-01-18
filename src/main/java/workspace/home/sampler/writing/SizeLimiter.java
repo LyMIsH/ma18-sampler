@@ -19,10 +19,10 @@ public class SizeLimiter extends FileLimiter {
         int endIndex = 1;
 
         List<HashMap<String, String>> records = new ArrayList<>();
-        recordStream.parallel().forEach(record -> records.add(record.getColumnValues()));
+        recordStream.forEach(record -> records.add(record.getColumnValues()));
         while (endIndex != records.size())
         {
-            File file = writeThread(writer, dest + "/" + name + fileNum, records.subList(startIndex, endIndex));
+            File file = write(writer, dest + "/" + name + fileNum, records.subList(startIndex, endIndex));
             if (file.length() > sizeLimitBytes - MARGIN)
             {
                 fileNum++;
@@ -32,7 +32,7 @@ public class SizeLimiter extends FileLimiter {
         }
     }
 
-    private static File writeThread(Writer writer, String dest, List<HashMap<String, String>> data)
+    private static File write(Writer writer, String dest, List<HashMap<String, String>> data)
     {
         File file;
         try

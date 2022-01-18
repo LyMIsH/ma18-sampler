@@ -15,29 +15,42 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void level1() throws IOException
+    {
         Parser csvParser = new CsvParser();
+        FileLimiter limiter = new RecordLimiter();
+        Stream<Record> recordStream = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
+        Transformer transformer = new DefaultTransformer();
+        transformer.transform(recordStream);
+        limiter.write("src/main/resources/mada_reports", "testJson", new JsonWriter(), 50000, recordStream);
+    }
+    public static void level2() throws IOException
+    {
+        Parser csvParser = new CsvParser();
+        FileLimiter limiter = new RecordLimiter();
+        Stream<Record> recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
+        Transformer transformer = new LabTestAdditions();
+        recordStream = transformer.transform(recordStream);
+        limiter.write("src/main/resources/LABTESTS", "testXml",
+                new XmlWriter("labTests", "labTest"), 50000, recordStream);
+    }
+    public static void level3() throws IOException
+    {
+        Parser csvParser = new CsvParser();
+        FileLimiter limiter = new SizeLimiter();
+        Stream<Record> recordStreamMada = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
+        Stream<Record> recordStreamLab = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
+        Transformer transformer = new PositivePeopleMerger();
+        Stream<Record> recordStream = transformer.transform(Stream.concat(recordStreamMada, recordStreamLab));
+        limiter.write("src/main/resources/POSITIVE_CORONA_PEOPLE", "test",
+                new JsonWriter(), 300000, recordStream);
+    }
+    public static void main(String[] args) {
         try
         {
-            FileLimiter limiter = new LineLimiter();
-            Stream<Record> recordStream = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
-            Transformer transformer = new DefaultTransformer();
-            transformer.transform(recordStream);
-            limiter.write("src/main/resources/mada_reports", "testJson", new JsonWriter(), 50000, recordStream);
-
-            recordStream = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
-            transformer = new LabTestAdditions();
-            recordStream = transformer.transform(recordStream);
-            limiter.write("src/main/resources/LABTESTS", "testXml",
-                    new XmlWriter("labTests", "labTest"), 50000, recordStream);
-
-            limiter = new SizeLimiter();
-            Stream<Record> recordStreamMada = csvParser.parse("src/main/resources/MadaReports.csv", new MadaRepRecord());
-            Stream<Record> recordStreamLab = csvParser.parse("src/main/resources/LabTests.csv", new LabTestRecord());
-            transformer = new PositivePeopleMerger();
-            recordStream = transformer.transform(Stream.concat(recordStreamMada, recordStreamLab));
-            limiter.write("src/main/resources/POSITIVE_CORONA_PEOPLE", "test",
-                    new JsonWriter(), 5000000, recordStream);
+            level1();
+            level2();
+            level3();
         }
         catch (IOException e)
         {

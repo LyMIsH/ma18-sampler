@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class LineLimiter extends FileLimiter{
+public class RecordLimiter extends FileLimiter{
     @Override
     public void write(String dest, String name, Writer writer, int lineLimit, Stream<Record> recordStream) throws IOException{
         ArrayList<Thread> threads = new ArrayList<>();

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<labTests>
+    <labTest>
+        <JOIN_DATE>1964-10-11</JOIN_DATE>
+        <StickerNumber>C7DE66BD-829F-15E0-8525-955A5E451B88</StickerNumber>
+        <FirstName>Merrill</FirstName>
+        <Labcode>50IN6</Labcode>
+        <TestType>RAPID</TestType>
+        <HEALTH_CARE_ID>1</HEALTH_CARE_ID>
+        <IDType>2</IDType>
+        <IDNum>418366868</IDNum>
+        <Variant>Delta</Variant>
+        <ResultTestCorona>0</ResultTestCorona>
+        <HEALTH_CARE_NAME>Macabi</HEALTH_CARE_NAME>
+        <LastName>Morrison</LastName>
+        <ResultDate>11/07/2022</ResultDate>
+        <BirthDate>22/10/1982</BirthDate>
+    </labTest>
+</labTests>
