@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class FileWriter {
-
-    public static void write(String dest, String name, Writer writer, int lineLimit, Stream<Record> recordStream) throws IOException{
+public class LineLimiter extends FileLimiter{
+    @Override
+    public void write(String dest, String name, Writer writer, int lineLimit, Stream<Record> recordStream) throws IOException{
         ArrayList<Thread> threads = new ArrayList<>();
         ArrayList<HashMap<String, String>> records = new ArrayList<>();
         recordStream.forEach(record -> records.add(record.getColumnValues()));
